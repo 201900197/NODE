@@ -3,7 +3,9 @@ var http = require('http');
   const app = express();
   const { config } = require('./config/index');
   const controllers = require('./routes/index.js');
+const { appendFileSync } = require('fs');
 
+  app.use(express.json());
   controllers(app);
 
   app.listen(config.port, function(){

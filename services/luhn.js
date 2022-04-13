@@ -18,6 +18,18 @@ async getLuhn(n) {
     return luhn || {}; 
 }
 
+async updateLuhn(data) {
+    const luhnUpdate = await this.mongoDB.updateLuhn(this.collection, data.id, data.data); 
+    console.log('luhn from serice', luhnUpdate);
+    return luhnUpdate || {}; 
+}
+
+async deleteLuhn(id) {
+    const luhnDeleted = await this.mongoDB.deleteLuhn(this.collection, id); 
+    console.log('luhn deleted', luhnDeleted);
+    return luhnDeleted || {}; 
+}
+
 }
 
 module.exports =LuhnService;

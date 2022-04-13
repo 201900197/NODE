@@ -45,13 +45,36 @@ function luhnApi(app) {
         const { body: number } = req;
         console.log('req', number);
         try {
+            if(isValid) {
+                const luhnUpdate = await luhnService.updateLuhn(number);
+          res.status(200).json({
+              data: luhnUpdate,
+              message: 'luhn succesgully updated' 
+          });
+        } else{
             res.status(200).json({
-                isValid: await isValidNumberCreditCard(number)
+                message: 'the credit card is invalid' 
             });
+        } 
         } catch (err) {
             next(err);
         }
     });
+
+    router.delete("/", async function(req, res, next){
+        const { body: luhn } = req;
+        console.log('luhn to delete', luhn);
+        try {
+          const luhnDeleted = await luhnService.deleteLuhn(luhn.id);
+          res.status(200).json({
+              luhn: luhnDeleted,
+              message: 'luhn succesfuly deleted'
+          });
+        } catch (err) {
+            next(err);
+        }
+    });
+
 
     function split_numbers(n) {
         console.log('split_numbers', n);

@@ -1,10 +1,7 @@
-const luhnApi = require('./luhn');
-
+const comprasApi = require ('./compras');
 
 function controllers(app){
-    luhnApi(app);
-   
+    comprasApi(app);
     
 } 
-
 module.exports = controllers;
